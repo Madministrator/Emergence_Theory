@@ -1,0 +1,44 @@
+Emergence Theory: when enough simple objects come together, they create a system that is more complex than the sum of their parts. 
+
+I watched a good video on this concept, and now am inspired to work on it in such a fashion that would resemble a neural network whose
+task is to create a conglomerate of cells capable of distinguishing oneself from another, then determine which type of cell it should be. 
+This is NOT an AI, there is no machine learning. Everything is random chance built to work in my favor.
+
+There will be five cell types, and if one were to print out the quantities of all the cell types, they should all be relatively equal to each other.
+If I can make an egalitarian system with no clear minority or majority, then I have completed my goal.
+
+To do this, I will follow the model of ants, and their pheromones. In an ant colony, each ant is given a task, they indicate what type of task they do
+by the pheromones they excrete. Thus, every other ant can tell what task every other ant does. However, each ant does not have access to all other ants, 
+only the ones it meets during the course of it's job. It must then, from that limited information, and through a set of super simple rules, determine
+what kind of ant it should be. Even with this randomness, the ant colony manages to maintain equilibrium without each ant being directly notified of it's 
+task. I will need to create a set of rules which behaves in this way as well. 
+
+Rules for the simulation:
+The cells will be stored in a vector. The starting length of that vector is determined by a seed given by the user. 
+	For the best results on my design, the seed should be no less than 100 for the initial runs, then can be reduced later once I have a working system.
+	The reduction should be done to understand behavior once I have a working neural network.
+
+If a single type of cell is reduced to less than 5% of the whole colony, then the colony has failed
+
+The vector whould be looped through infinitely until either the user tells it to stop, or the colony fails. Each loop will have the following occur:
+	Each cell will randomly encounter three other cells, this cell will track the type of the cells it meets.
+	The cell will follow the rules for cells described below
+	At the end of every loop, a new cell is added to the vector, the new cell gets a random task
+
+After every ten seconds, a table of the distribution is printed. This allows the user to track how the colony is doing
+
+Once complexity has been reached, a reach goal is to stress the colony, randomized cataclysmic events will affect one or more of the types, but leave 
+other types completely alone.
+
+
+Rules for the cells:
+When a cell enocunters another cell, it records the type (0,1,2,3,4) of that cell and also tells the other cell to record it's cell type. 
+After these two exchange information, the type is stored in an array, and that array is checked to see if any index surpases the THRESHOLD constant. 
+If the cell record surpasses the threshold constant, the largest quantity in the record array (the same index that broke the threshold) is checked 
+against the smallest count in the array. If the difference of the two is larger than the DIFFERENCE constant, the cell turns into the cell type of 
+the smallest count in the record. Regardless of whether or not the cell changes it's own type, the record is reset.
+
+In Summary, Cells follow these basic rules
+1. At the collision of two cells, they exchange cell types
+2. If there is sufficient data in the type_record array, the cell will decide if it needs to change cell type
+3. The type_record is wiped every time the threshold is passed. 
